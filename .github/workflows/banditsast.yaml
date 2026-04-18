@@ -30,7 +30,7 @@ jobs:
         with:
           baseurl: "https://cloud.appscan.com"
           target: "http://localhost:5000"
-          api_key: ${{ secrets.APPSCAN_API_KEYID }}
-          api_secret: ${{ secrets.APPSCAN_API_SECRET }}
+          asoc_key: ${{ secrets.APPSCAN_API_KEYID }}
+          asoc_secret: ${{ secrets.APPSCAN_API_SECRET }}
           application_id: 1392fcd5-bd11-406c-b1ec-a334a963e705
 
