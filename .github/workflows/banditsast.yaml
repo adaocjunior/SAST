@@ -12,7 +12,23 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-      - name: Instalar bandit
-        run: pip install bandit
+      - name: Instalar depencencias
+        run: pip install requirements.txt
       - name: Executar SAST
         run: bandit -r . -f custom
+  appscan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions-checkout@v2
+      - name: Instalar dependencias e executar aplicacao
+        run: |
+          pip install -r requirements.txt
+          nohup python3 app.py &       
+          sleep 5 # Espere servidor iniciar
+      - name: hcl/appscan-dast-action@v1
+        with:
+          target: "http://localhost:5000"
+          api_key: ${{ secrets.APPSCAN_API_KEYID }}
+          api_secret: ${{ secrets.APPSCAN_API_SECRET }}
+
